@@ -1,0 +1,19 @@
+.property {
+    background-color: #D13030;
+    border-bottom: solid;
+    padding-top: 10px;
+    padding-bottom: 12px;
+    padding-right: 10px;
+    padding-left: 15px;
+}
+
+.property-label {
+    display: inline-block;
+    color: whitesmoke;
+    margin: 0px 0px 15px 0px;
+}
+
+.property-input {
+    display: block;
+    margin: 0px 0px 15px 0px;
+}

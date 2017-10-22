@@ -4,16 +4,33 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import { specs, describe, it } from 'storybook-addon-specifications'
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, object } from '@storybook/addon-knobs';
 
-import { Button, Welcome } from '@storybook/react/demo';
+import ObjectPropertiesList from '../object-properties-list/object-properties-list';
 
 import {mount} from "enzyme";
 import expect from "expect";
 
-const stories = storiesOf('Button', module);
+// <Button onClick={linkTo('Button', 'Second')}>Hello Button</Button>))
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+//Object Properties List
+const objectPropertiesListStories = storiesOf('Object Properties List', module);
+objectPropertiesListStories.addDecorator(withKnobs);
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>);
+let objectPropertiesListInput = [
+  {
+    name: "The First Prop",
+    type: "text"
+  },
+  {
+    name: "The Second Prop",
+    type: "number"
+  }
+]
+
+objectPropertiesListStories.add('No Text', withInfo('ObjectPropertiesList with no properties')
+    (() => <ObjectPropertiesList />))
+
+objectPropertiesListStories.add('With Text', withInfo('ObjectPropertiesList with text and number properties')
+(() => <ObjectPropertiesList properties={object('Properties', objectPropertiesListInput)}/>))

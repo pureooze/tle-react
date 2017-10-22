@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/addon-console": "^1.0.0",
+    "@storybook/addon-info": "^3.2.13",
+    "@storybook/addon-knobs": "^3.2.13",
     "@storybook/addon-storyshots": "^3.2.13",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",

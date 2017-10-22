@@ -3,14 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@storybook/addon-storyshots": "^3.2.13",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "expect": "^21.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.14",
+    "storybook-addon-specifications": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.13",
+    "@storybook/addon-links": "^3.2.13",
+    "@storybook/react": "^3.2.13"
   }
 }

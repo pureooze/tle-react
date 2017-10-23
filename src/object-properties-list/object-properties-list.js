@@ -13,7 +13,7 @@ class ObjectPropertiesList extends Component {
         return (
           <div className="property" key={propKey}>
             <b className="property-label">{property.name}:</b>
-            <input className="property-input" value={property.value} type={property.type} />
+            <input className="property-input" defaultValue={property.value} type={property.type} />
           </div>
         );
       })

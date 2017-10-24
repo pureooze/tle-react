@@ -9,6 +9,7 @@ import { withKnobs, object, text } from '@storybook/addon-knobs';
 
 import ObjectPropertiesList from '../object-properties-list/object-properties-list';
 import RoomList from '../room-list/room-list';
+import RoomObject from '../room-object/room-object';
 
 import Enzyme from 'enzyme';
 import {mount, shallow} from "enzyme";
@@ -76,3 +77,13 @@ roomListStories.add('No Text', withInfo('RoomList with no rooms')
 roomListStories.add('Rooms passed in', withInfo('RoomList with rooms')
 (() => <RoomList rooms={object('Rooms', roomListInput)}
                  defaultSelection={text("Default Selection","Choose Room")}/>))
+
+
+//Room Object
+const roomObjectStories = storiesOf('Room Object', module);
+roomObjectStories.addDecorator(withKnobs);
+
+let roomObjectInput = "MSG"
+
+roomObjectStories.add('Passed in text', withInfo('RoomObject with text')
+(() => <RoomObject name={text("Name", roomObjectInput)}/>))

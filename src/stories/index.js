@@ -5,9 +5,10 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import { specs, describe, it } from 'storybook-addon-specifications'
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs, object } from '@storybook/addon-knobs';
+import { withKnobs, object, text } from '@storybook/addon-knobs';
 
 import ObjectPropertiesList from '../object-properties-list/object-properties-list';
+import RoomList from '../room-list/room-list';
 
 import Enzyme from 'enzyme';
 import {mount, shallow} from "enzyme";
@@ -38,10 +39,7 @@ let objectPropertiesListInput = [
 objectPropertiesListStories.add('No Text', withInfo('ObjectPropertiesList with no properties')
     (() => <ObjectPropertiesList />))
 
-objectPropertiesListStories.add('With Text', withInfo('ObjectPropertiesList with text and number properties')
-    (() => <ObjectPropertiesList properties={object('Properties', objectPropertiesListInput)}/>))
-
-objectPropertiesListStories.add('With Text1', withInfo('ObjectPropertiesList with text and number properties') (function () {
+objectPropertiesListStories.add('With Text', withInfo('ObjectPropertiesList with text and number properties') (function () {
   const story = <ObjectPropertiesList properties={object('Properties', objectPropertiesListInput)}/>
 
   specs(() => describe('Testing With Text', function () {
@@ -55,3 +53,26 @@ objectPropertiesListStories.add('With Text1', withInfo('ObjectPropertiesList wit
 
   return story;
 }))
+
+//Room List
+const roomListStories = storiesOf('Room List', module);
+roomListStories.addDecorator(withKnobs);
+
+let roomListInput = [
+  {
+    name: "The First Room"
+  },
+  {
+    name: "The Second Room"
+  },
+  {
+    name: "The Third Room"
+  }
+]
+
+roomListStories.add('No Text', withInfo('RoomList with no rooms')
+(() => <RoomList />))
+
+roomListStories.add('Rooms passed in', withInfo('RoomList with rooms')
+(() => <RoomList rooms={object('Rooms', roomListInput)}
+                 defaultSelection={text("Default Selection","Choose Room")}/>))

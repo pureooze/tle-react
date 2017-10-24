@@ -711,7 +711,7 @@ exports[`Storyshots Object Properties List With Text 1`] = `
 </div>
 `;
 
-exports[`Storyshots Object Properties List With Text1 1`] = `
+exports[`Storyshots Room List No Text 1`] = `
 <div>
   <div
     style={
@@ -722,36 +722,9 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
     }
   >
     <div>
-      <div
-        className="property"
-      >
-        <b
-          className="property-label"
-        >
-          The First Prop
-          :
-        </b>
-        <input
-          className="property-input"
-          defaultValue="First"
-          type="text"
-        />
-      </div>
-      <div
-        className="property"
-      >
-        <b
-          className="property-label"
-        >
-          The Second Prop
-          :
-        </b>
-        <input
-          className="property-input"
-          defaultValue="10"
-          type="number"
-        />
-      </div>
+      <span>
+        No rooms to display
+      </span>
     </div>
   </div>
   <a
@@ -855,7 +828,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
               }
             }
           >
-            Object Properties List
+            Room List
           </h1>
           <h2
             style={
@@ -867,7 +840,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
               }
             }
           >
-            With Text1
+            No Text
           </h2>
         </div>
         <div
@@ -887,7 +860,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
               }
             }
           >
-            ObjectPropertiesList with text and number properties
+            RoomList with no rooms
           </p>
         </div>
         <div>
@@ -931,7 +904,274 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                 }
               >
                 &lt;
-                ObjectPropertiesList
+                RoomList
+              </span>
+              <span />
+              <span
+                style={
+                  Object {
+                    "color": "#777",
+                  }
+                }
+              >
+                /&gt;
+              </span>
+            </div>
+          </pre>
+        </div>
+        <div>
+          <h1
+            style={
+              Object {
+                "borderBottom": "1px solid #EEE",
+                "fontSize": "25px",
+                "margin": "20px 0 0 0",
+                "padding": "0 0 5px 0",
+              }
+            }
+          >
+            Prop Types
+          </h1>
+          <div>
+            <h2
+              style={
+                Object {
+                  "margin": "20px 0 0 0",
+                }
+              }
+            >
+              "
+              RoomList
+              " Component
+            </h2>
+            <small>
+              No propTypes defined!
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Room List Rooms passed in 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "position": "relative",
+        "zIndex": 0,
+      }
+    }
+  >
+    <div>
+      <select
+        value="Choose Room"
+      >
+        <option
+          className="room-label"
+          disabled={true}
+          hidden={true}
+        >
+          Choose Room
+        </option>
+        <option
+          className="room-label"
+        >
+          The First Room
+        </option>
+        <option
+          className="room-label"
+        >
+          The Second Room
+        </option>
+        <option
+          className="room-label"
+        >
+          The Third Room
+        </option>
+      </select>
+    </div>
+  </div>
+  <a
+    onClick={[Function]}
+    role="button"
+    style={
+      Object {
+        "background": "#28c",
+        "borderRadius": "0 0 0 5px",
+        "color": "#fff",
+        "cursor": "pointer",
+        "display": "block",
+        "fontFamily": "sans-serif",
+        "fontSize": "12px",
+        "padding": "5px 15px",
+        "position": "fixed",
+        "right": 0,
+        "textDecoration": "none",
+        "top": 0,
+      }
+    }
+    tabIndex="0"
+  >
+    Show Info
+  </a>
+  <div
+    style={
+      Object {
+        "background": "white",
+        "bottom": 0,
+        "display": "none",
+        "left": 0,
+        "overflow": "auto",
+        "padding": "0 40px",
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+        "zIndex": 99999,
+      }
+    }
+  >
+    <a
+      onClick={[Function]}
+      role="button"
+      style={
+        Object {
+          "background": "#28c",
+          "borderRadius": "0 0 0 5px",
+          "color": "#fff",
+          "cursor": "pointer",
+          "display": "block",
+          "fontFamily": "sans-serif",
+          "fontSize": "12px",
+          "padding": "5px 15px",
+          "position": "fixed",
+          "right": 0,
+          "textDecoration": "none",
+          "top": 0,
+        }
+      }
+      tabIndex="0"
+    >
+      ×
+    </a>
+    <div
+      style={undefined}
+    >
+      <div
+        style={
+          Object {
+            "WebkitFontSmoothing": "antialiased",
+            "backgroundColor": "#fff",
+            "border": "1px solid #eee",
+            "borderRadius": "2px",
+            "boxShadow": "0px 2px 3px rgba(0, 0, 0, 0.05)",
+            "color": "#444",
+            "fontFamily": "-apple-system, \\".SFNSText-Regular\\", \\"San Francisco\\", BlinkMacSystemFont, \\"Segoe UI\\", \\"Roboto\\", \\"Oxygen\\", \\"Ubuntu\\", \\"Cantarell\\", \\"Fira Sans\\", \\"Droid Sans\\", \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\", sans-serif",
+            "fontSize": "15px",
+            "fontWeight": 300,
+            "lineHeight": 1.45,
+            "marginTop": "50px",
+            "padding": "20px 40px 40px",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "borderBottom": "1px solid #eee",
+              "marginBottom": 10,
+              "paddingTop": 10,
+            }
+          }
+        >
+          <h1
+            style={
+              Object {
+                "fontSize": "35px",
+                "margin": 0,
+                "padding": 0,
+              }
+            }
+          >
+            Room List
+          </h1>
+          <h2
+            style={
+              Object {
+                "fontSize": "22px",
+                "fontWeight": 400,
+                "margin": "0 0 10px 0",
+                "padding": 0,
+              }
+            }
+          >
+            Rooms passed in
+          </h2>
+        </div>
+        <div
+          style={
+            Object {
+              "marginBottom": 0,
+            }
+          }
+        >
+          <p
+            style={
+              Object {
+                "WebkitFontSmoothing": "antialiased",
+                "color": "#444",
+                "fontFamily": "-apple-system, \\".SFNSText-Regular\\", \\"San Francisco\\", BlinkMacSystemFont, \\"Segoe UI\\", \\"Roboto\\", \\"Oxygen\\", \\"Ubuntu\\", \\"Cantarell\\", \\"Fira Sans\\", \\"Droid Sans\\", \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\", sans-serif",
+                "fontSize": "15px",
+              }
+            }
+          >
+            RoomList with rooms
+          </p>
+        </div>
+        <div>
+          <h1
+            style={
+              Object {
+                "borderBottom": "1px solid #EEE",
+                "fontSize": "25px",
+                "margin": "20px 0 0 0",
+                "padding": "0 0 5px 0",
+              }
+            }
+          >
+            Story Source
+          </h1>
+          <pre
+            style={
+              Object {
+                "backgroundColor": "#fafafa",
+                "fontFamily": "Menlo, Monaco, \\"Courier New\\", monospace",
+                "fontSize": ".88em",
+                "lineHeight": 1.5,
+                "overflowX": "scroll",
+                "padding": ".5rem",
+              }
+            }
+          >
+            <div
+              style={
+                Object {
+                  "paddingLeft": 18,
+                  "paddingRight": 3,
+                }
+              }
+            >
+              <span
+                style={
+                  Object {
+                    "color": "#777",
+                  }
+                }
+              >
+                &lt;
+                RoomList
               </span>
               <span>
                 <span>
@@ -939,7 +1179,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                   <span
                     style={Object {}}
                   >
-                    properties
+                    rooms
                   </span>
                   <span>
                     =
@@ -985,53 +1225,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                                 }
                               >
                                 "
-                                The First Prop
-                                "
-                              </span>
-                              , 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#666",
-                                  }
-                                }
-                              >
-                                type
-                              </span>
-                              : 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#22a",
-                                    "wordBreak": "break-word",
-                                  }
-                                }
-                              >
-                                "
-                                text
-                                "
-                              </span>
-                              , 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#666",
-                                  }
-                                }
-                              >
-                                value
-                              </span>
-                              : 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#22a",
-                                    "wordBreak": "break-word",
-                                  }
-                                }
-                              >
-                                "
-                                First
+                                The First Room
                                 "
                               </span>
                               }
@@ -1068,10 +1262,24 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                                 }
                               >
                                 "
-                                The Second Prop
+                                The Second Room
                                 "
                               </span>
-                              , 
+                              }
+                            </span>
+                            }
+                          </span>
+                          , 
+                          <span>
+                            {
+                            <span
+                              style={
+                                Object {
+                                  "color": "#666",
+                                }
+                              }
+                            >
+                              {
                               <span
                                 style={
                                   Object {
@@ -1079,7 +1287,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                                   }
                                 }
                               >
-                                type
+                                name
                               </span>
                               : 
                               <span
@@ -1091,30 +1299,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                                 }
                               >
                                 "
-                                number
-                                "
-                              </span>
-                              , 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#666",
-                                  }
-                                }
-                              >
-                                value
-                              </span>
-                              : 
-                              <span
-                                style={
-                                  Object {
-                                    "color": "#22a",
-                                    "wordBreak": "break-word",
-                                  }
-                                }
-                              >
-                                "
-                                10
+                                The Third Room
                                 "
                               </span>
                               }
@@ -1124,6 +1309,33 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
                           ]
                         </span>
                         }
+                      </span>
+                    </span>
+                  </span>
+                </span>
+                <span>
+                   
+                  <span
+                    style={Object {}}
+                  >
+                    defaultSelection
+                  </span>
+                  <span>
+                    =
+                    <span
+                      style={Object {}}
+                    >
+                      <span
+                        style={
+                          Object {
+                            "color": "#22a",
+                            "wordBreak": "break-word",
+                          }
+                        }
+                      >
+                        "
+                        Choose Room
+                        "
                       </span>
                     </span>
                   </span>
@@ -1164,7 +1376,7 @@ exports[`Storyshots Object Properties List With Text1 1`] = `
               }
             >
               "
-              ObjectPropertiesList
+              RoomList
               " Component
             </h2>
             <small>

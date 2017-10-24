@@ -7,20 +7,24 @@ class RoomList extends Component {
     let roomList = {}
 
     if(this.props.rooms === undefined){
-      roomList = <b>No rooms to display</b>
+      roomList = <span>No rooms to display</span>
     }else{
-      roomList = this.props.rooms.map(function(room, roomKey) {
-        return (
-          <div className="room-list" key={roomKey}>
-            <span className="room-label">{room.name}</span>
-          </div>
-        );
-      })
+      roomList =
+        <select value={this.props.defaultSelection}>
+          <option className="room-label" disabled hidden>{this.props.defaultSelection}</option>
+          {
+            this.props.rooms.map(function(room, roomKey) {
+              return (
+                <option className="room-label" key={roomKey}>{room.name}</option>
+              );
+            })
+          }
+        </select>
     }
 
     return (
       <div>
-        {roomList}
+          {roomList}
       </div>
     );
   }

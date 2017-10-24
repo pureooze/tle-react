@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import { specs, describe, it } from 'storybook-addon-specifications'
 import { withInfo } from '@storybook/addon-info';
-import { withKnobs, object } from '@storybook/addon-knobs';
+import { withKnobs, object, text } from '@storybook/addon-knobs';
 
 import ObjectPropertiesList from '../object-properties-list/object-properties-list';
 import RoomList from '../room-list/room-list';
@@ -74,4 +74,5 @@ roomListStories.add('No Text', withInfo('RoomList with no rooms')
 (() => <RoomList />))
 
 roomListStories.add('Rooms passed in', withInfo('RoomList with rooms')
-(() => <RoomList rooms={object('Rooms', roomListInput)}/>))
+(() => <RoomList rooms={object('Rooms', roomListInput)}
+                 defaultSelection={text("Default Selection","Choose Room")}/>))

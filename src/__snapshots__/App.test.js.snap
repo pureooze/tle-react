@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing (snapshot) 1`] = `
+<div
+  className="App"
+>
+  <b>
+    Testing
+  </b>
+  <div
+    className="TestDiv"
+  >
+    <input
+      defaultValue="6"
+      type="number"
+    />
+  </div>
+</div>
+`;

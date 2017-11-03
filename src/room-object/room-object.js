@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import './room-object.css';
+import React, { Component } from 'react'
+import './room-object.css'
 
 class RoomObject extends Component {
-  render() {
-
+  render () {
     return (
-      <div className="room">
-        <div className="room-box">
-        </div>
+      <div className='room'>
+        <div className='room-box' />
         <p >{this.props.name}</p>
       </div>
-    );
+    )
   }
 }
 
-export default RoomObject;
+export default RoomObject

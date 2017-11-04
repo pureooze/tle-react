@@ -7,6 +7,7 @@ import { specs, describe, it } from 'storybook-addon-specifications'
 import { withInfo } from '@storybook/addon-info'
 import { withKnobs, object, text } from '@storybook/addon-knobs'
 
+import App from '../App'
 import ObjectPropertiesList from '../object-properties-list/object-properties-list'
 import RoomList from '../room-list/room-list'
 import RoomObject from '../room-object/room-object'
@@ -22,6 +23,12 @@ import expect from 'expect'
 Enzyme.configure({
   adapter: new Adapter()
 })
+
+// Full App
+const appStories = storiesOf('App', module)
+appStories.addDecorator(withKnobs)
+
+appStories.add('Default', withInfo('Default app values')(() => <App />))
 
 // Object Properties List
 const objectPropertiesListStories = storiesOf('Object Properties List', module)
@@ -88,4 +95,4 @@ roomObjectStories.add('Passed in text', withInfo('RoomObject with text')(() => <
 
 // TleToolbar Object
 const tleToolbarStories = storiesOf('Tle Toolbar', module)
-tleToolbarStories.add('Default', withInfo('TleToolbar with defaults')(() => <TleToolbar />))
+tleToolbarStories.add('Default', withInfo('TleToolbar with defaults ')(() => <TleToolbar />))

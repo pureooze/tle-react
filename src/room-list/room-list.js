@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './room-list.css'
+import Menu, { MenuItem } from 'material-ui/Menu';
+import PropTypes from 'prop-types';
 
 class RoomList extends Component {
   render() {
@@ -8,26 +10,33 @@ class RoomList extends Component {
     if (this.props.rooms === undefined) {
       roomList = <span>No rooms to display</span>
     } else {
-      roomList = <select value={ this.props.defaultSelection }>
-                   <option className='room-label' disabled hidden>
-                     { this.props.defaultSelection }
-                   </option>
+      roomList = <Menu value={ this.props.defaultSelection }>
+                   <MenuItem disabled hidden>
+                   { this.props.defaultSelection }
+                   </MenuItem>
                    { this.props.rooms.map(function(room, roomKey) {
                        return (
-                         <option className='room-label' key={ roomKey }>
-                           { room.name }
-                         </option>
+                         <MenuItem key={ roomKey }>
+                         { room.name }
+                         </MenuItem>
                        )
                      }) }
-                 </select>
+                 </Menu>
     }
 
     return (
       <div>
-        { roomList }
+        <Button>
+          { roomList }
+        </Button>
       </div>
     )
   }
+}
+
+RoomList.propTypes = {
+  defaultSelection: PropTypes.string,
+  rooms: PropTypes.array
 }
 
 export default RoomList

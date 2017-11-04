@@ -1,0 +1,15 @@
+.room {
+    width: 10em;
+    height: 10em;
+    text-align: center;
+}
+
+.room-box {
+    display: inline-block;
+    position: relative;
+    border: solid;
+    border-width: thin;
+    width: 10em;
+    height: 10em;
+    background-color: greenyellow;
+}

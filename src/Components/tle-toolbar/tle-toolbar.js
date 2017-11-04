@@ -1,12 +1,13 @@
 import React from 'react'
-import './tle-toolbar.css'
+import PropTypes from 'prop-types';
+
 // import TleToolbarButton from '../tle-toolbar-button/tle-toolbar-button'
-import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
 
 class TleToolbar extends React.Component {
 
@@ -31,34 +32,59 @@ class TleToolbar extends React.Component {
   }
 
   render() {
+
+    let handleMenuSelection = (action, e) => {
+      this.handleRequestClose()
+      action()
+    }
+
     const options = [
-      'Add',
-      'Remove'
+      {
+        name: 'Manage Rooms',
+        action: () => {
+          console.log("Manage")
+        }
+      },
+      {
+        name: 'Remove',
+        action: () => {
+          console.log("Remove")
+        }
+      }
     ];
 
     const ITEM_HEIGHT = 48;
     const open = Boolean(this.state.anchorEl);
 
+    let menuItems = options.map(option => (
+      <MenuItem key={ option.name } onClick={ (e) => handleMenuSelection(option.action, e) }>
+      { option.name }
+      </MenuItem>
+    ))
+
     return (
       <div>
         <Toolbar>
-          <IconButton color="contrast" aria-label="Menu" onClick={ this.handleClick }>
+          <IconButton color="contrast" aria-label="Menu">
             <MenuIcon />
           </IconButton>
           <Typography type="title" color="inherit">
-            Title
+            { this.props.title }
           </Typography>
           <Menu id="long-menu" anchorEl={ this.state.anchorEl } open={ open } onRequestClose={ this.handleRequestClose } PaperProps={ { style: { maxHeight: ITEM_HEIGHT * 4.5, width: 200, }, } }>
-            { options.map(option => (
-                <MenuItem key={ option } selected={ option === 'Pyxis' } onClick={ this.handleRequestClose }>
-                { option }
-                </MenuItem>
-              )) }
+            { menuItems }
           </Menu>
+          <IconButton color="contrast" aria-label="More" onClick={ this.handleClick }>
+            <MoreVertIcon />
+          </IconButton>
         </Toolbar>
       </div>
     )
   }
+}
+
+TleToolbar.propTypes = {
+  title: PropTypes.string
 }
 
 export default TleToolbar

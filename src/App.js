@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import TleToolbar from './tle-toolbar/tle-toolbar'
+import TleToolbar from './Components/tle-toolbar/tle-toolbar'
 
 class App extends Component {
   render() {
@@ -8,7 +8,7 @@ class App extends Component {
       <div className="App">
         <div>
           <AppBar title="My AppBar">
-            <TleToolbar/>
+            <TleToolbar title="TLE" />
           </AppBar>
         </div>
       </div>

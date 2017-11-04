@@ -8,10 +8,11 @@ import { withInfo } from '@storybook/addon-info'
 import { withKnobs, object, text } from '@storybook/addon-knobs'
 
 import App from '../App'
-import ObjectPropertiesList from '../object-properties-list/object-properties-list'
-import RoomList from '../room-list/room-list'
-import RoomObject from '../room-object/room-object'
-import TleToolbar from '../tle-toolbar/tle-toolbar'
+import ObjectPropertiesList from '../Components/object-properties-list/object-properties-list'
+import RoomList from '../Components/room-list/room-list'
+import RoomObject from '../Components/room-object/room-object'
+import TleToolbar from '../Components/tle-toolbar/tle-toolbar'
+import AddRoomDialog from '../Components/add-room-dialog/add-room-dialog'
 
 import { mount, shallow } from 'enzyme'
 import Enzyme from 'enzyme'
@@ -96,3 +97,9 @@ roomObjectStories.add('Passed in text', withInfo('RoomObject with text')(() => <
 // TleToolbar Object
 const tleToolbarStories = storiesOf('Tle Toolbar', module)
 tleToolbarStories.add('Default', withInfo('TleToolbar with defaults ')(() => <TleToolbar />))
+
+// Add Room Dialog
+const addRoomDialogStories = storiesOf('Add Room Dialog', module)
+addRoomDialogStories.addDecorator(withKnobs)
+
+addRoomDialogStories.add('Default', withInfo('Default')(() => <AddRoomDialog open={ true } />))

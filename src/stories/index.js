@@ -25,11 +25,22 @@ Enzyme.configure({
   adapter: new Adapter()
 })
 
+let rooms = [
+  {
+    name: 'The First Room'
+  },
+  {
+    name: 'The Second Room'
+  },
+  {
+    name: 'The Third Room'
+  }
+]
 // Full App
 const appStories = storiesOf('App', module)
 appStories.addDecorator(withKnobs)
 
-appStories.add('Default', withInfo('Default app values')(() => <App />))
+appStories.add('Default', withInfo('Default app values')(() => <App rooms={ rooms } />))
 
 // Object Properties List
 const objectPropertiesListStories = storiesOf('Object Properties List', module)
@@ -102,4 +113,4 @@ tleToolbarStories.add('Default', withInfo('TleToolbar with defaults ')(() => <Tl
 const addRoomDialogStories = storiesOf('Add Room Dialog', module)
 addRoomDialogStories.addDecorator(withKnobs)
 
-addRoomDialogStories.add('Default', withInfo('Default')(() => <AddRoomDialog open={ true } />))
+addRoomDialogStories.add('Default', withInfo('Default')(() => <AddRoomDialog rooms={ rooms } open={ true } />))

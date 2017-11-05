@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 // import TleToolbarButton from '../tle-toolbar-button/tle-toolbar-button'
+import AddRoomDialog from '../add-room-dialog/add-room-dialog'
+
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
@@ -13,51 +15,61 @@ class TleToolbar extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       anchorEl: null,
-    };
-
-    this.handleClick = event => {
-      this.setState({
-        anchorEl: event.currentTarget
-      });
-    };
-
-    this.handleRequestClose = () => {
-      this.setState({
-        anchorEl: null
-      });
+      addRoomDialogIsVisible: false
     };
 
   }
 
-  render() {
+  handleClick = event => {
+    this.setState({
+      anchorEl: event.currentTarget
+    });
+  };
 
-    let handleMenuSelection = (action, e) => {
-      this.handleRequestClose()
-      action()
-    }
+  handleRequestClose = () => {
+    this.setState({
+      anchorEl: null
+    });
+  };
 
-    const options = [
-      {
-        name: 'Manage Rooms',
-        action: () => {
-          console.log("Manage")
-        }
-      },
-      {
-        name: 'Remove',
-        action: () => {
-          console.log("Remove")
-        }
+  handleMenuSelection = (action, e) => {
+    this.handleRequestClose()
+    action()
+  }
+
+  dialogCloseHandler = () => {
+    this.setState({
+      addRoomDialogIsVisible: !this.state.addRoomDialogIsVisible
+    })
+  }
+
+  options =[
+    {
+      name: 'Manage Rooms',
+      action: () => {
+        this.setState({
+          addRoomDialogIsVisible: !this.state.addRoomDialogIsVisible
+        })
       }
-    ];
+    },
+    {
+      name: 'Remove',
+      action: () => {
+        console.log("Remove")
+      }
+    }
+  ];
+
+  render() {
 
     const ITEM_HEIGHT = 48;
     const open = Boolean(this.state.anchorEl);
 
-    let menuItems = options.map(option => (
-      <MenuItem key={ option.name } onClick={ (e) => handleMenuSelection(option.action, e) }>
+    let menuItems = this.options.map(option => (
+      <MenuItem key={ option.name } onClick={ (e) => this.handleMenuSelection(option.action, e) }>
       { option.name }
       </MenuItem>
     ))
@@ -77,6 +89,7 @@ class TleToolbar extends React.Component {
           <IconButton color="contrast" aria-label="More" onClick={ this.handleClick }>
             <MoreVertIcon />
           </IconButton>
+          <AddRoomDialog rooms={ this.props.rooms } open={ this.state.addRoomDialogIsVisible } dialogClose={ this.dialogCloseHandler } />
         </Toolbar>
       </div>
     )
@@ -84,7 +97,8 @@ class TleToolbar extends React.Component {
 }
 
 TleToolbar.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  rooms: PropTypes.array.isRequired
 }
 
 export default TleToolbar

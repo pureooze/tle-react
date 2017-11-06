@@ -15,7 +15,7 @@ class AddRoomDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTabIndex: 0
+      selectedTabIndex: 0,
     };
 
     this.manageRoomsMessage = "Here you can create new rooms or modify existing ones. To create a new room, click the plus icon. To modify existing ones select the room from the drop down menu."
@@ -23,11 +23,11 @@ class AddRoomDialog extends Component {
     this.tabValues = [
       {
         name: "Add Rooms",
-        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } dialogClose={ this.props.dialogClose } />
+        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
       },
       {
         name: "Modify Rooms",
-        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } dialogClose={ this.props.dialogClose } />
+        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
       },
       {
         name: "?? Rooms",
@@ -44,8 +44,9 @@ class AddRoomDialog extends Component {
     console.log('TODO: Form should clear')
   }
 
-  handleSubmitForm = () => {
+  handleSubmitForm = (newRoom) => {
     this.clearForm()
+    this.props.handleAddNewRoom(newRoom)
     this.setState({
       submitEnabled: !this.state.submitEnabled
     })
@@ -112,7 +113,8 @@ class AddRoomDialog extends Component {
 AddRoomDialog.propTypes = {
   open: PropTypes.bool,
   dialogClose: PropTypes.func,
-  rooms: PropTypes.array.isRequired
+  rooms: PropTypes.array.isRequired,
+  handleAddNewRoom: PropTypes.func.isRequired
 }
 
 export default AddRoomDialog;

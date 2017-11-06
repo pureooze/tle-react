@@ -27,13 +27,16 @@ Enzyme.configure({
 
 let rooms = [
   {
-    name: 'The First Room'
+    name: 'The First Room',
+    entryText: "You entered the first room"
   },
   {
-    name: 'The Second Room'
+    name: 'The Second Room',
+    entryText: "You entered the second room"
   },
   {
-    name: 'The Third Room'
+    name: 'The Third Room',
+    entryText: "You entered the third room"
   }
 ]
 // Full App

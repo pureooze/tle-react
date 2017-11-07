@@ -9,13 +9,17 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import AddRoomForm from '../add-room-form/add-room-form'
+import ModifyRoomForm from '../modify-room-form/modify-room-form'
 
 class AddRoomDialog extends Component {
 
   constructor(props) {
     super(props);
+
+    let selectedTabIndex = this.props.selectedTabIndex ? this.props.selectedTabIndex : 0
+
     this.state = {
-      selectedTabIndex: 0,
+      selectedTabIndex
     };
 
     this.manageRoomsMessage = "Here you can create new rooms or modify existing ones. To create a new room, click the plus icon. To modify existing ones select the room from the drop down menu."
@@ -27,7 +31,7 @@ class AddRoomDialog extends Component {
       },
       {
         name: "Modify Rooms",
-        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
+        content: <ModifyRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
       },
       {
         name: "?? Rooms",
@@ -46,6 +50,7 @@ class AddRoomDialog extends Component {
 
   handleSubmitForm = (newRoom) => {
     this.clearForm()
+    // TODO: Make message appear instead of timeout + green button
     this.props.handleAddNewRoom(newRoom)
     this.setState({
       submitEnabled: !this.state.submitEnabled
@@ -111,6 +116,7 @@ class AddRoomDialog extends Component {
 }
 
 AddRoomDialog.propTypes = {
+  selectedTabIndex: PropTypes.number,
   open: PropTypes.bool,
   dialogClose: PropTypes.func,
   rooms: PropTypes.array.isRequired,

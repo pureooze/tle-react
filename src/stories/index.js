@@ -117,3 +117,5 @@ const addRoomDialogStories = storiesOf('Add Room Dialog', module)
 addRoomDialogStories.addDecorator(withKnobs)
 
 addRoomDialogStories.add('Default', withInfo('Default')(() => <AddRoomDialog rooms={ rooms } open={ true } />))
+
+addRoomDialogStories.add('Modify Room open', withInfo('Default')(() => <AddRoomDialog rooms={ rooms } open={ true } selectedTabIndex={ 1 } />))

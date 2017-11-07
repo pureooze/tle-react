@@ -19,7 +19,7 @@ class App extends Component {
       this.setState({
         rooms: currentRoomList
       })
-    }, 3000)
+    }, 1500)
   }
 
   render() {

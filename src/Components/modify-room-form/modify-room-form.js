@@ -11,16 +11,53 @@ class ModifyRoomForm extends Component {
     super(props);
     this.state = {
       rooms: this.props.rooms,
-      selectedRoom: '',
-      entryText: ''
+      selectedRoom: {
+        name: "",
+        entryText: "Enter Text"
+      },
     };
+
+    this.originalRoomValues = Object.assign({}, this.state.selectedRoom)
+    this.roomValues = this.originalRoomValues
   }
 
   handleChange = (e) => {
-    this.setState({
-      selectedRoom: e.target.value,
-      entryText: e.target.value.entryText
+    this.state.rooms.map((room) => {
+      if(e.target.value === room.name){
+        this.originalRoomValues = room
+      }
     })
+    this.roomValues = Object.assign({}, this.originalRoomValues)
+    this.setState({
+      selectedRoom: this.originalRoomValues
+    })
+  }
+
+  handleInputChange = (e) => {
+    this.roomValues.entryText = e.target.value
+    this.setState({
+      selectedRoom: this.roomValues
+    })
+  };
+
+  restoreForm = () => {
+    this.roomValues = Object.assign({}, this.originalRoomValues)
+    this.setState({
+      selectedRoom: this.originalRoomValues
+    })
+  }
+
+  validateForm = (e) => {
+    const value = e.target.value
+    if (value !== "" && value !== null && value !== undefined) {
+      this.setState({
+        submitEnabled: !this.state.submitEnabled
+      })
+    }
+  }
+
+  submitForm = () => {
+    console.log(this.roomValues)
   }
 
   render() {
@@ -29,18 +66,27 @@ class ModifyRoomForm extends Component {
 
     if (this.props.rooms) {
       existingRoomEntries = this.props.rooms.map(room => (
-        <MenuItem key={ room.name } value={ room }>
+        <MenuItem key={ room.name } value={ room.name }>
         { room.name }
         </MenuItem>
       ))
     }
 
+    let submitButton
+    if (this.state.submitEnabled) {
+      submitButton = <Button color="primary" onClick={this.submitForm}> OK </Button>
+    } else {
+      submitButton = <Button disabled color="primary"> OK </Button>
+    }
+
     return (
       <form className="container" autoComplete="off">
-        <Select value={ this.state.selectedRoom } onChange={ this.handleChange } displayEmpty>
+        <Select value={ this.state.selectedRoom.name } onChange={ this.handleChange } displayEmpty>
           { existingRoomEntries }
         </Select>
-        <TextField multiline id="room-entry-text" label="Room Entry Text" value={ this.state.entryText } className="textField" margin="none" fullWidth/>
+        <TextField multiline id="room-entry-text" label="Room Entry Text" value={ this.roomValues.entryText } margin="none" fullWidth onBlur={ this.validateForm } onChange={ this.handleInputChange }/>
+        { submitButton }
+        <Button onClick={ this.restoreForm }>Restore</Button>
       </form>
       );
   }

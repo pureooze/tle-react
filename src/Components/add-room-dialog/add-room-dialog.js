@@ -92,18 +92,6 @@ class AddRoomDialog extends Component {
             <DialogContentText>
               { this.manageRoomsMessage }
             </DialogContentText>
-            <Grid container spacing={ 24 }>
-              <Grid item xs={ 8 }>
-                <Select value={ 10 }>
-                  { existingRoomEntries }
-                </Select>
-              </Grid>
-              <Grid item xs={ 3 }>
-                <Button fab color="primary" aria-label="Add room">
-                  <AddIcon />
-                </Button>
-              </Grid>
-            </Grid>
             <Tabs value={ this.state.selectedTabIndex } onChange={ this.handleChange } indicatorColor="primary" textColor="primary" fullWidth>
               { visibleTabs }
             </Tabs>

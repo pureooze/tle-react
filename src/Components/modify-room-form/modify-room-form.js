@@ -23,7 +23,7 @@ class ModifyRoomForm extends Component {
 
   handleChange = (e) => {
     this.state.rooms.map((room) => {
-      if(e.target.value === room.name){
+      if (e.target.value === room.name) {
         this.originalRoomValues = room
       }
     })
@@ -47,6 +47,10 @@ class ModifyRoomForm extends Component {
     })
   }
 
+  submitForm = () => {
+    this.props.submitFormHandler(this.originalRoomValues, this.roomValues)
+  }
+
   validateForm = (e) => {
     const value = e.target.value
     if (value !== "" && value !== null && value !== undefined) {
@@ -56,12 +60,7 @@ class ModifyRoomForm extends Component {
     }
   }
 
-  submitForm = () => {
-    console.log(this.roomValues)
-  }
-
   render() {
-
     let existingRoomEntries
 
     if (this.props.rooms) {
@@ -74,7 +73,7 @@ class ModifyRoomForm extends Component {
 
     let submitButton
     if (this.state.submitEnabled) {
-      submitButton = <Button color="primary" onClick={this.submitForm}> OK </Button>
+      submitButton = <Button color="primary" onClick={ this.submitForm }> OK </Button>
     } else {
       submitButton = <Button disabled color="primary"> OK </Button>
     }
@@ -84,7 +83,8 @@ class ModifyRoomForm extends Component {
         <Select value={ this.state.selectedRoom.name } onChange={ this.handleChange } displayEmpty>
           { existingRoomEntries }
         </Select>
-        <TextField multiline id="room-entry-text" label="Room Entry Text" value={ this.roomValues.entryText } margin="none" fullWidth onBlur={ this.validateForm } onChange={ this.handleInputChange }/>
+        <TextField multiline id="room-entry-text" label="Room Entry Text" value={ this.roomValues.entryText } margin="none" fullWidth onBlur={ this.validateForm } onChange={ this.handleInputChange }
+        />
         { submitButton }
         <Button onClick={ this.restoreForm }>Restore</Button>
       </form>

@@ -1,40 +1,39 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import './add-room-dialog.css'
 import Button from 'material-ui/Button'
-import Dialog, { DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog';
-import Grid from 'material-ui/Grid';
-import AddIcon from 'material-ui-icons/Add';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import Tabs, { Tab } from 'material-ui/Tabs';
+import Dialog, { DialogContent, DialogContentText, DialogTitle } from 'material-ui/Dialog'
+import Grid from 'material-ui/Grid'
+import AddIcon from 'material-ui-icons/Add'
+import Select from 'material-ui/Select'
+import { MenuItem } from 'material-ui/Menu'
+import Tabs, { Tab } from 'material-ui/Tabs'
 import AddRoomForm from '../add-room-form/add-room-form'
 import ModifyRoomForm from '../modify-room-form/modify-room-form'
 
 class AddRoomDialog extends Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     let selectedTabIndex = this.props.selectedTabIndex ? this.props.selectedTabIndex : 0
 
     this.state = {
       selectedTabIndex
-    };
+    }
 
-    this.manageRoomsMessage = "Here you can create new rooms or modify existing ones. To create a new room, click the plus icon. To modify existing ones select the room from the drop down menu."
+    this.manageRoomsMessage = 'Here you can create new rooms or modify existing ones. To create a new room, click the plus icon. To modify existing ones select the room from the drop down menu.'
 
     this.tabValues = [
       {
-        name: "Add Rooms",
-        content: <AddRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
+        name: 'Add Rooms',
+        content: <AddRoomForm submitFormHandler={this.handleSubmitForm} rooms={this.props.rooms} />
       },
       {
-        name: "Modify Rooms",
-        content: <ModifyRoomForm submitFormHandler={ this.handleSubmitForm } rooms={ this.props.rooms } />
+        name: 'Modify Rooms',
+        content: <ModifyRoomForm submitFormHandler={this.handleModifyRoomSubmit} rooms={this.props.rooms} />
       },
       {
-        name: "?? Rooms",
+        name: '?? Rooms',
         content: null
       }
     ]
@@ -46,6 +45,10 @@ class AddRoomDialog extends Component {
 
   clearForm = () => {
     console.log('TODO: Form should clear')
+  }
+
+  handleModifyRoomSubmit = (originalRoom, newRoom) => {
+    this.props.handleModifyRoom(originalRoom, newRoom)
   }
 
   handleSubmitForm = (newRoom) => {
@@ -60,46 +63,45 @@ class AddRoomDialog extends Component {
   handleChange = (event, selectedTabIndex) => {
     this.setState({
       selectedTabIndex
-    });
+    })
   };
 
   getSelectedTabContent = () => {
     return this.tabValues[this.state.selectedTabIndex].content
   }
 
-  render() {
-
+  render () {
     let existingRoomEntries,
-      visibleTabs;
+      visibleTabs
 
     if (this.props.rooms) {
       existingRoomEntries = this.props.rooms.map(room => (
-        <MenuItem key={ room.name } value={ room.name }>
-        { room.name }
+        <MenuItem key={room.name} value={room.name}>
+          { room.name }
         </MenuItem>
       ))
     }
 
     visibleTabs = this.tabValues.map(tab => (
-      <Tab key={ tab.name } label={ tab.name } />
+      <Tab key={tab.name} label={tab.name} />
     ))
 
     return (
       <div>
-        <Dialog open={ this.props.open } onRequestClose={ this.handleRequestClose }>
+        <Dialog open={this.props.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>Manage Rooms</DialogTitle>
           <DialogContent>
             <DialogContentText>
               { this.manageRoomsMessage }
             </DialogContentText>
-            <Tabs value={ this.state.selectedTabIndex } onChange={ this.handleChange } indicatorColor="primary" textColor="primary" fullWidth>
+            <Tabs value={this.state.selectedTabIndex} onChange={this.handleChange} indicatorColor='primary' textColor='primary' fullWidth>
               { visibleTabs }
             </Tabs>
             { this.getSelectedTabContent() }
           </DialogContent>
         </Dialog>
       </div>
-      );
+    )
   }
 }
 
@@ -111,4 +113,4 @@ AddRoomDialog.propTypes = {
   handleAddNewRoom: PropTypes.func.isRequired
 }
 
-export default AddRoomDialog;
+export default AddRoomDialog

@@ -89,7 +89,7 @@ class TleToolbar extends React.Component {
           <IconButton color="contrast" aria-label="More" onClick={ this.handleClick }>
             <MoreVertIcon />
           </IconButton>
-          <AddRoomDialog rooms={ this.props.rooms } open={ this.state.addRoomDialogIsVisible } dialogClose={ this.dialogCloseHandler } handleAddNewRoom={ this.props.handleAddNewRoom } />
+          <AddRoomDialog rooms={ this.props.rooms } open={ this.state.addRoomDialogIsVisible } dialogClose={ this.dialogCloseHandler } handleAddNewRoom={ this.props.handleAddNewRoom } handleModifyRoom={this.props.handleModifyRoom} />
         </Toolbar>
       </div>
     )

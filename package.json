@@ -41,5 +41,8 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }

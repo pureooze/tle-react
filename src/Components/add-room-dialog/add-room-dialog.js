@@ -22,21 +22,6 @@ class AddRoomDialog extends Component {
     }
 
     this.manageRoomsMessage = 'Here you can create new rooms or modify existing ones. To create a new room, click the plus icon. To modify existing ones select the room from the drop down menu.'
-
-    this.tabValues = [
-      {
-        name: 'Add Rooms',
-        content: <AddRoomForm submitFormHandler={this.handleSubmitForm} rooms={this.props.rooms} />
-      },
-      {
-        name: 'Modify Rooms',
-        content: <ModifyRoomForm submitFormHandler={this.handleModifyRoomSubmit} rooms={this.props.rooms} />
-      },
-      {
-        name: '?? Rooms',
-        content: null
-      }
-    ]
   }
 
   handleRequestClose = () => {
@@ -73,6 +58,21 @@ class AddRoomDialog extends Component {
   render () {
     let existingRoomEntries,
       visibleTabs
+
+    this.tabValues = [
+      {
+        name: 'Add Rooms',
+        content: <AddRoomForm submitFormHandler={this.handleSubmitForm} rooms={this.props.rooms} />
+      },
+      {
+        name: 'Modify Rooms',
+        content: <ModifyRoomForm submitFormHandler={this.handleModifyRoomSubmit} rooms={this.props.rooms} />
+      },
+      {
+        name: '?? Rooms',
+        content: null
+      }
+    ]
 
     if (this.props.rooms) {
       existingRoomEntries = this.props.rooms.map(room => (

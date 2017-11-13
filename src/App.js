@@ -25,14 +25,17 @@ class App extends Component {
   handleModifyRoom = (originalRoom, newRoom) => {
     let originalRoomString = JSON.stringify(originalRoom)
     let originalRoomList = this.state.rooms
-    originalRoomList.map((room, index) => {
+
+    let rooms = originalRoomList.map((room, index) => {
       if (JSON.stringify(room) === originalRoomString) {
-        originalRoomList[index] = Object.assign({}, newRoom)
+        room = newRoom
       }
+
+      return room
     })
 
     this.setState({
-      rooms: originalRoomList
+      rooms
     })
   }
 

@@ -28,22 +28,33 @@ Enzyme.configure({
 let rooms = [
   {
     name: 'The First Room',
-    entryText: "You entered the first room"
+    entryText: 'You entered the first room',
+    exits: []
   },
   {
     name: 'The Second Room',
-    entryText: "You entered the second room"
+    entryText: 'You entered the second room',
+    exits: []
   },
   {
     name: 'The Third Room',
-    entryText: "You entered the third room"
+    entryText: 'You entered the third room',
+    exits: []
   }
 ]
+
+rooms[0].exits.push({
+  name: 'SecondRoom',
+  target: rooms[1]
+})
 // Full App
 const appStories = storiesOf('App', module)
 appStories.addDecorator(withKnobs)
 
-appStories.add('Default', withInfo('Default app values')(() => <App rooms={ rooms } />))
+appStories.add(
+  'Default',
+  withInfo('Default app values')(() => <App rooms={rooms} />)
+)
 
 // Object Properties List
 const objectPropertiesListStories = storiesOf('Object Properties List', module)
@@ -62,23 +73,37 @@ let objectPropertiesListInput = [
   }
 ]
 
-objectPropertiesListStories.add('No Text', withInfo('ObjectPropertiesList with no properties')(() => <ObjectPropertiesList />))
+objectPropertiesListStories.add(
+  'No Text',
+  withInfo('ObjectPropertiesList with no properties')(() => (
+    <ObjectPropertiesList />
+  ))
+)
 
-objectPropertiesListStories.add('With Text', withInfo('ObjectPropertiesList with text and number properties')(function() {
-  const story = <ObjectPropertiesList properties={ object('Properties', objectPropertiesListInput) } />
+objectPropertiesListStories.add(
+  'With Text',
+  withInfo('ObjectPropertiesList with text and number properties')(function () {
+    const story = (
+      <ObjectPropertiesList
+        properties={object('Properties', objectPropertiesListInput)}
+      />
+    )
 
-  specs(() => describe('Testing With Text', function() {
-    it('Should show the two inputs', function() {
-      const output = mount(story)
-      const firstInput = <b className='property-label'>The First Prop:</b>
-      const secondInput = <b className='property-label'>The Second Prop:</b>
-      expect(output.contains(firstInput)).toEqual(true)
-      expect(output.contains(secondInput)).toEqual(true)
-    })
-  }))
+    specs(() =>
+      describe('Testing With Text', function () {
+        it('Should show the two inputs', function () {
+          const output = mount(story)
+          const firstInput = <b className='property-label'>The First Prop:</b>
+          const secondInput = <b className='property-label'>The Second Prop:</b>
+          expect(output.contains(firstInput)).toEqual(true)
+          expect(output.contains(secondInput)).toEqual(true)
+        })
+      })
+    )
 
-  return story
-}))
+    return story
+  })
+)
 
 // Room List
 const roomListStories = storiesOf('Room List', module)
@@ -96,9 +121,20 @@ let roomListInput = [
   }
 ]
 
-roomListStories.add('No Text', withInfo('RoomList with no rooms')(() => <RoomList />))
+roomListStories.add(
+  'No Text',
+  withInfo('RoomList with no rooms')(() => <RoomList />)
+)
 
-roomListStories.add('Rooms passed in', withInfo('RoomList with rooms')(() => <RoomList rooms={ object('Rooms', roomListInput) } defaultSelection={ text('Default Selection', 'Choose Room') } />))
+roomListStories.add(
+  'Rooms passed in',
+  withInfo('RoomList with rooms')(() => (
+    <RoomList
+      rooms={object('Rooms', roomListInput)}
+      defaultSelection={text('Default Selection', 'Choose Room')}
+    />
+  ))
+)
 
 // Room Object
 const roomObjectStories = storiesOf('Room Object', module)
@@ -106,16 +142,32 @@ roomObjectStories.addDecorator(withKnobs)
 
 let roomObjectInput = 'MSG'
 
-roomObjectStories.add('Passed in text', withInfo('RoomObject with text')(() => <RoomObject name={ text('Name', roomObjectInput) } />))
+roomObjectStories.add(
+  'Passed in text',
+  withInfo('RoomObject with text')(() => (
+    <RoomObject name={text('Name', roomObjectInput)} />
+  ))
+)
 
 // TleToolbar Object
 const tleToolbarStories = storiesOf('Tle Toolbar', module)
-tleToolbarStories.add('Default', withInfo('TleToolbar with defaults ')(() => <TleToolbar />))
+tleToolbarStories.add(
+  'Default',
+  withInfo('TleToolbar with defaults ')(() => <TleToolbar />)
+)
 
 // Add Room Dialog
 const addRoomDialogStories = storiesOf('Add Room Dialog', module)
 addRoomDialogStories.addDecorator(withKnobs)
 
-addRoomDialogStories.add('Default', withInfo('Default')(() => <AddRoomDialog rooms={ rooms } open={ true } />))
+addRoomDialogStories.add(
+  'Default',
+  withInfo('Default')(() => <AddRoomDialog rooms={rooms} open />)
+)
 
-addRoomDialogStories.add('Modify Room open', withInfo('Default')(() => <AddRoomDialog rooms={ rooms } open={ true } selectedTabIndex={ 1 } />))
+addRoomDialogStories.add(
+  'Modify Room open',
+  withInfo('Default')(() => (
+    <AddRoomDialog rooms={rooms} open selectedTabIndex={1} />
+  ))
+)

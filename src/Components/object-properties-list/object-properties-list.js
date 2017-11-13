@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import './object-properties-list.css';
+import React, { Component } from 'react'
+import './object-properties-list.css'
 
 class ObjectPropertiesList extends Component {
-  render() {
-
+  render () {
     let properties = {}
 
-    if(this.props.properties === undefined){
+    if (this.props.properties === undefined) {
       properties = <b>No properties to display</b>
-    }else{
-      properties = this.props.properties.map(function(property, propKey) {
+    } else {
+      properties = this.props.properties.map(function (property, propKey) {
         return (
-          <div className="property" key={propKey}>
-            <b className="property-label">{property.name}:</b>
-            <input className="property-input" defaultValue={property.value} type={property.type} />
+          <div className='property' key={propKey}>
+            <b className='property-label'>{property.name}:</b>
+            <input className='property-input' defaultValue={property.value} type={property.type} />
           </div>
-        );
+        )
       })
     }
 
@@ -23,8 +22,8 @@ class ObjectPropertiesList extends Component {
       <div>
         {properties}
       </div>
-    );
+    )
   }
 }
 
-export default ObjectPropertiesList;
+export default ObjectPropertiesList

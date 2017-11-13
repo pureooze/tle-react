@@ -7,6 +7,7 @@
     "@storybook/addon-info": "^3.2.13",
     "@storybook/addon-knobs": "^3.2.13",
     "@storybook/addon-storyshots": "^3.2.13",
+    "babel-eslint": "^8.0.2",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-matchers": "^4.0.1",

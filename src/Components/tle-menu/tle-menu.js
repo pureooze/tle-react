@@ -1,24 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-
-
+import PropTypes from 'prop-types'
 
 class TleMenu extends React.Component {
-
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      anchorEl: this.props.anchorEl,
-    };
-
+      anchorEl: this.props.anchorEl
+    }
   }
 
-  render() {
-
-
+  render () {
     return (
-      <div>
-      </div>
+      <div />
     )
   }
 }

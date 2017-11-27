@@ -19,6 +19,7 @@
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
     "react-scripts": "^1.0.14",
     "react-test-renderer": "^16.0.0",
     "storybook-addon-specifications": "^2.1.1"

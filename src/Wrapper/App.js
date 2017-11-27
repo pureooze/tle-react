@@ -12,11 +12,14 @@ import Divider from 'material-ui/Divider'
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import List from 'material-ui/List'
 import RoomModificationListItems from '../Components/roomModificationListItems'
+import AppDialog from '../Components/appDialog'
+import AddRoomForm from '../Components/addRoomForm'
 
 import { openDrawer, closeDrawer } from '../actions/drawerActions'
+import { openAppDialog, loadAddRoomDialog, closeAppDialog } from '../actions/appDialogActions'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.handleOpenDrawer = (e) => {
@@ -28,36 +31,49 @@ class App extends Component {
     }
 
     this.handleAddRoom = (e) => {
-      this.handleCloseDrawer()
-      console.log('Add room')
+      this.props.dispatch(openAppDialog())
+      this.props.dispatch(loadAddRoomDialog())
+    }
+
+    this.handleAppDialogClose = (e) => {
+      this.props.dispatch(closeAppDialog())
     }
   }
 
-  render() {
+  render () {
+    let dialogContent = (
+      <AddRoomForm />
+    )
+
+    let dialogTitle = 'Add Room'
+
     return (
       <div className='App'>
         <div>
           <AppBar title='My AppBar'>
             <Toolbar>
-              <IconButton color='contrast' aria-label='Menu' onClick={ this.handleOpenDrawer }>
+              <IconButton color='contrast' aria-label='Menu' onClick={this.handleOpenDrawer}>
                 <MenuIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer type='persistent' anchor={ this.props.anchor } open={ this.props.drawerOpen }>
+          <Drawer type='persistent' anchor={this.props.anchor} open={this.props.drawerOpen}>
             <div>
               <div>
-                <IconButton onClick={ this.handleCloseDrawer }>
+                <IconButton onClick={this.handleCloseDrawer}>
                   <ChevronLeftIcon />
                 </IconButton>
               </div>
               <Divider />
               <List>
-                <RoomModificationListItems handleAddRoom={ this.handleAddRoom } />
+                <RoomModificationListItems handleAddRoom={this.handleAddRoom} />
               </List>
             </div>
           </Drawer>
         </div>
+        <AppDialog title={dialogTitle} appDialogOpen={this.props.appDialogOpen} handleAppDialogClose={this.handleAppDialogClose}>
+          { dialogContent }
+        </AppDialog>
       </div>
     )
   }
@@ -65,7 +81,9 @@ class App extends Component {
 
 const mapStateToProps = store => {
   return {
-    drawerOpen: store.AppReducer.drawerOpen
+    drawerOpen: store.AppReducer.drawerOpen,
+    appDialogOpen: store.AppReducer.appDialogOpen,
+    appDialogType: store.AppReducer.appDialogType
   }
 }
 

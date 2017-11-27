@@ -12,7 +12,8 @@ import registerServiceWorker from './registerServiceWorker'
 let store = createStore(tleApp, {
   AppReducer: {
     drawerOpen: false,
-    anchor: 'left'
+    anchor: 'left',
+    appDialogOpen: false
   }
 })
 

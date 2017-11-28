@@ -40,7 +40,7 @@ class App extends Component {
     }
 
     this.handleAddRoomSubmit = (newRoom) => {
-      newRoom.name = 'Testing'
+      console.log(newRoom)
       this.props.dispatch(addNewRoom(newRoom))
       this.props.dispatch(closeAppDialog())
     }

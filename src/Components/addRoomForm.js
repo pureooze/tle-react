@@ -26,19 +26,24 @@ class AddRoomForm extends Component {
     super(props)
 
     this.state = {
-      name: '',
-      description: ''
+      room: {}
     }
 
     this.handleNameChange = (e) => {
+      let room = this.state.room
+      room.name = e.target.value
+
       this.setState({
-        name: e.target.value
+        room
       })
     }
 
     this.handleDescriptionChange = (e) => {
+      let room = this.state.room
+      room.description = e.target.value
+
       this.setState({
-        description: e.target.value
+        room
       })
     }
   }
@@ -54,7 +59,7 @@ class AddRoomForm extends Component {
         <TextField id='name' label='Name' value={this.state.name} onChange={this.handleNameChange} fullWidth margin='normal' />
         <TextField id='description' label='Description' value={this.state.description} onChange={this.handleDescriptionChange} fullWidth margin='normal' />
         <DialogActions>
-          <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit({})}>
+          <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit(this.state.room)}>
             Ok
           </Button>
           <Button className={classes.button} onClick={this.props.handleDialogClose}>

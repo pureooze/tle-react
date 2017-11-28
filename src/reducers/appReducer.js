@@ -25,6 +25,11 @@ const AppReducer = (state = [], action) => {
         ...state,
         appDialogType: action.payload.appDialogType
       }
+    case 'ADD_NEW_ROOM':
+      return {
+        ...state,
+        rooms: [...state.rooms, action.payload.newRoom]
+      }
     default:
       return state
   }

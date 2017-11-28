@@ -16,7 +16,7 @@ import AppDialog from '../Components/appDialog'
 import AddRoomForm from '../Components/addRoomForm'
 
 import { openDrawer, closeDrawer } from '../actions/drawerActions'
-import { openAppDialog, loadAddRoomDialog, closeAppDialog } from '../actions/appDialogActions'
+import { openAppDialog, loadAddRoomDialog, closeAppDialog, addNewRoom } from '../actions/appDialogActions'
 
 class App extends Component {
   constructor (props) {
@@ -38,11 +38,18 @@ class App extends Component {
     this.handleAppDialogClose = (e) => {
       this.props.dispatch(closeAppDialog())
     }
+
+    this.handleAddRoomSubmit = (newRoom) => {
+      newRoom.name = 'Testing'
+      this.props.dispatch(addNewRoom(newRoom))
+      this.props.dispatch(closeAppDialog())
+    }
   }
 
   render () {
+    console.log(this.props.rooms)
     let dialogContent = (
-      <AddRoomForm />
+      <AddRoomForm handleDialogClose={this.handleAppDialogClose} handleAddRoomSubmit={this.handleAddRoomSubmit} />
     )
 
     let dialogTitle = 'Add Room'
@@ -83,12 +90,9 @@ const mapStateToProps = store => {
   return {
     drawerOpen: store.AppReducer.drawerOpen,
     appDialogOpen: store.AppReducer.appDialogOpen,
-    appDialogType: store.AppReducer.appDialogType
+    appDialogType: store.AppReducer.appDialogType,
+    rooms: store.AppReducer.rooms
   }
-}
-
-App.propTypes = {
-  rooms: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(App)

@@ -24,3 +24,12 @@ export const loadAddRoomDialog = () => {
     }
   }
 }
+
+export const addNewRoom = (newRoom) => {
+  return {
+    type: 'ADD_NEW_ROOM',
+    payload: {
+      newRoom: newRoom
+    }
+  }
+}

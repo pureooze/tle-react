@@ -13,12 +13,13 @@ let store = createStore(tleApp, {
   AppReducer: {
     drawerOpen: false,
     anchor: 'left',
-    appDialogOpen: false
+    appDialogOpen: false,
+    rooms: []
   }
 })
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root'))

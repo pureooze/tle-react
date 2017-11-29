@@ -1,8 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './Wrapper/App'
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import tleApp from './reducers'
+
+import registerServiceWorker from './registerServiceWorker'
+
+let store = createStore(tleApp, {
+  AppReducer: {
+    drawerOpen: false,
+    anchor: 'left',
+    appDialogOpen: false,
+    rooms: []
+  }
+})
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'))
+registerServiceWorker()

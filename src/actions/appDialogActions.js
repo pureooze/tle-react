@@ -42,3 +42,12 @@ export const addNewRoom = (newRoom) => {
     }
   }
 }
+
+export const editRooms = (rooms) => {
+  return {
+    type: 'EDIT_ROOMS',
+    payload: {
+      rooms: rooms
+    }
+  }
+}

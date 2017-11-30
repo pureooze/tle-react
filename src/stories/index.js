@@ -61,7 +61,7 @@ appStories.addDecorator(withKnobs)
 
 appStories.add(
   'Default',
-  withInfo('Default app values')(() => <Provider store={ store }>
-                                         <App rooms={ rooms } />
-                                       </Provider>)
+  withInfo('Default app values')(() => <Provider store={store}>
+    <App rooms={rooms} />
+  </Provider>)
 )

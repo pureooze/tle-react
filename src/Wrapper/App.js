@@ -17,10 +17,10 @@ import AddRoomForm from '../Components/addRoomForm'
 import EditRoomForm from '../Components/editRoomForm'
 
 import { openDrawer, closeDrawer } from '../actions/drawerActions'
-import { openAppDialog, loadAddRoomDialog, closeAppDialog, addNewRoom, loadEditRoomDialog } from '../actions/appDialogActions'
+import { openAppDialog, loadAddRoomDialog, closeAppDialog, addNewRoom, loadEditRoomDialog, editRooms } from '../actions/appDialogActions'
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.handleOpenDrawer = (e) => {
@@ -45,11 +45,15 @@ class App extends Component {
       this.props.dispatch(closeAppDialog())
     }
 
+    this.handleEditRoomSubmit = (rooms) => {
+      this.props.dispatch(editRooms(rooms))
+      this.props.dispatch(closeAppDialog())
+    }
+
     this.handleAddRoomSubmit = (newRoom) => {
       var roomId = new Uint32Array(1)
       window.crypto.getRandomValues(roomId)
-      newRoom.id = roomId
-
+      newRoom.id = roomId[0]
       this.props.dispatch(addNewRoom(newRoom))
       this.props.dispatch(closeAppDialog())
     }
@@ -57,16 +61,16 @@ class App extends Component {
     this.getDialogContent = () => {
       switch (this.props.appDialogType) {
         case 'ADD_ROOM':
-          return <AddRoomForm handleDialogClose={ this.handleAppDialogClose } handleAddRoomSubmit={ this.handleAddRoomSubmit } />
+          return <AddRoomForm handleDialogClose={this.handleAppDialogClose} handleAddRoomSubmit={this.handleAddRoomSubmit} />
         case 'EDIT_ROOM':
-          return <EditRoomForm rooms={ this.props.rooms } handleDialogClose={ this.handleAppDialogClose } handleAddRoomSubmit={ this.handleAddRoomSubmit } />
+          return <EditRoomForm rooms={this.props.rooms} handleDialogClose={this.handleAppDialogClose} handleEditRoomSubmit={this.handleEditRoomSubmit} />
         default:
           return <div />
       }
     }
   }
 
-  render() {
+  render () {
     let dialogContent = this.getDialogContent()
 
     return (
@@ -74,26 +78,26 @@ class App extends Component {
         <div>
           <AppBar title='My AppBar'>
             <Toolbar>
-              <IconButton color='contrast' aria-label='Menu' onClick={ this.handleOpenDrawer }>
+              <IconButton color='contrast' aria-label='Menu' onClick={this.handleOpenDrawer}>
                 <MenuIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer type='persistent' anchor={ this.props.anchor } open={ this.props.drawerOpen }>
+          <Drawer type='persistent' anchor={this.props.anchor} open={this.props.drawerOpen}>
             <div>
               <div>
-                <IconButton onClick={ this.handleCloseDrawer }>
+                <IconButton onClick={this.handleCloseDrawer}>
                   <ChevronLeftIcon />
                 </IconButton>
               </div>
               <Divider />
               <List>
-                <RoomModificationListItems handleAddRoom={ this.handleAddRoom } handleEditRoom={ this.handleEditRoom } />
+                <RoomModificationListItems handleAddRoom={this.handleAddRoom} handleEditRoom={this.handleEditRoom} />
               </List>
             </div>
           </Drawer>
         </div>
-        <AppDialog appDialogOpen={ this.props.appDialogOpen } handleAppDialogClose={ this.handleAppDialogClose }>
+        <AppDialog appDialogOpen={this.props.appDialogOpen} handleAppDialogClose={this.handleAppDialogClose}>
           { dialogContent }
         </AppDialog>
       </div>

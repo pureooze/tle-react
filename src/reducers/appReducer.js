@@ -35,6 +35,11 @@ const AppReducer = (state = [], action) => {
         ...state,
         rooms: [...state.rooms, action.payload.newRoom]
       }
+    case 'EDIT_ROOMS':
+      return {
+        ...state,
+        rooms: action.payload.rooms
+      }
     default:
       return state
   }

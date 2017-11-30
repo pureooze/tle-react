@@ -25,6 +25,15 @@ export const loadAddRoomDialog = () => {
   }
 }
 
+export const loadEditRoomDialog = () => {
+  return {
+    type: 'LOAD_EDIT_ROOM_DIALOG',
+    payload: {
+      appDialogType: 'EDIT_ROOM'
+    }
+  }
+}
+
 export const addNewRoom = (newRoom) => {
   return {
     type: 'ADD_NEW_ROOM',

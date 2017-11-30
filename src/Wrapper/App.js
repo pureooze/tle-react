@@ -14,12 +14,13 @@ import List from 'material-ui/List'
 import RoomModificationListItems from '../Components/roomModificationListItems'
 import AppDialog from '../Components/appDialog'
 import AddRoomForm from '../Components/addRoomForm'
+import EditRoomForm from '../Components/editRoomForm'
 
 import { openDrawer, closeDrawer } from '../actions/drawerActions'
-import { openAppDialog, loadAddRoomDialog, closeAppDialog, addNewRoom } from '../actions/appDialogActions'
+import { openAppDialog, loadAddRoomDialog, closeAppDialog, addNewRoom, loadEditRoomDialog } from '../actions/appDialogActions'
 
 class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.handleOpenDrawer = (e) => {
@@ -35,50 +36,64 @@ class App extends Component {
       this.props.dispatch(loadAddRoomDialog())
     }
 
+    this.handleEditRoom = (e) => {
+      this.props.dispatch(openAppDialog())
+      this.props.dispatch(loadEditRoomDialog())
+    }
+
     this.handleAppDialogClose = (e) => {
       this.props.dispatch(closeAppDialog())
     }
 
     this.handleAddRoomSubmit = (newRoom) => {
-      console.log(newRoom)
+      var roomId = new Uint32Array(1)
+      window.crypto.getRandomValues(roomId)
+      newRoom.id = roomId
+
       this.props.dispatch(addNewRoom(newRoom))
       this.props.dispatch(closeAppDialog())
     }
+
+    this.getDialogContent = () => {
+      switch (this.props.appDialogType) {
+        case 'ADD_ROOM':
+          return <AddRoomForm handleDialogClose={ this.handleAppDialogClose } handleAddRoomSubmit={ this.handleAddRoomSubmit } />
+        case 'EDIT_ROOM':
+          return <EditRoomForm rooms={ this.props.rooms } handleDialogClose={ this.handleAppDialogClose } handleAddRoomSubmit={ this.handleAddRoomSubmit } />
+        default:
+          return <div />
+      }
+    }
   }
 
-  render () {
-    console.log(this.props.rooms)
-    let dialogContent = (
-      <AddRoomForm handleDialogClose={this.handleAppDialogClose} handleAddRoomSubmit={this.handleAddRoomSubmit} />
-    )
-
-    let dialogTitle = 'Add Room'
+  render() {
+    let dialogContent = this.getDialogContent()
 
     return (
       <div className='App'>
         <div>
           <AppBar title='My AppBar'>
             <Toolbar>
-              <IconButton color='contrast' aria-label='Menu' onClick={this.handleOpenDrawer}>
+              <IconButton color='contrast' aria-label='Menu' onClick={ this.handleOpenDrawer }>
                 <MenuIcon />
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Drawer type='persistent' anchor={this.props.anchor} open={this.props.drawerOpen}>
+          <Drawer type='persistent' anchor={ this.props.anchor } open={ this.props.drawerOpen }>
             <div>
               <div>
-                <IconButton onClick={this.handleCloseDrawer}>
+                <IconButton onClick={ this.handleCloseDrawer }>
                   <ChevronLeftIcon />
                 </IconButton>
               </div>
               <Divider />
               <List>
-                <RoomModificationListItems handleAddRoom={this.handleAddRoom} />
+                <RoomModificationListItems handleAddRoom={ this.handleAddRoom } handleEditRoom={ this.handleEditRoom } />
               </List>
             </div>
           </Drawer>
         </div>
-        <AppDialog title={dialogTitle} appDialogOpen={this.props.appDialogOpen} handleAppDialogClose={this.handleAppDialogClose}>
+        <AppDialog appDialogOpen={ this.props.appDialogOpen } handleAppDialogClose={ this.handleAppDialogClose }>
           { dialogContent }
         </AppDialog>
       </div>

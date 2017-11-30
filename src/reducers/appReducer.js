@@ -25,6 +25,11 @@ const AppReducer = (state = [], action) => {
         ...state,
         appDialogType: action.payload.appDialogType
       }
+    case 'LOAD_EDIT_ROOM_DIALOG':
+      return {
+        ...state,
+        appDialogType: action.payload.appDialogType
+      }
     case 'ADD_NEW_ROOM':
       return {
         ...state,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import { DialogContentText, DialogContent, DialogActions } from 'material-ui/Dialog'
+import { DialogContentText, DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
@@ -49,23 +49,29 @@ class AddRoomForm extends Component {
   }
 
   render () {
+    let dialogTitle = 'Add Room'
     let contentText = 'New rooms require a name and desciption.'
     const {classes} = this.props
     return (
       <div>
-        <DialogContentText>
-          { contentText }
-        </DialogContentText>
-        <TextField id='name' label='Name' value={this.state.name} onChange={this.handleNameChange} fullWidth margin='normal' />
-        <TextField id='description' label='Description' value={this.state.description} onChange={this.handleDescriptionChange} fullWidth margin='normal' />
-        <DialogActions>
-          <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit(this.state.room)}>
-            Ok
-          </Button>
-          <Button className={classes.button} onClick={this.props.handleDialogClose}>
-            Cancel
-          </Button>
-        </DialogActions>
+        <DialogTitle>
+          { dialogTitle }
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            { contentText }
+          </DialogContentText>
+          <TextField id='name' label='Name' value={this.state.name} onChange={this.handleNameChange} fullWidth margin='normal' />
+          <TextField id='description' label='Description' value={this.state.description} onChange={this.handleDescriptionChange} fullWidth margin='normal' />
+          <DialogActions>
+            <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit(this.state.room)}>
+              Ok
+            </Button>
+            <Button className={classes.button} onClick={this.props.handleDialogClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </DialogContent>
       </div>
     )
   }

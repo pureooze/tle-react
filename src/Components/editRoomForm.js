@@ -53,41 +53,19 @@ class EditRoomForm extends Component {
     };
 
     this.handleRoomSelectionChange = e => {
-      this.props.handleRoomSelectionChange(e.target.value);
+      for (let room of this.props.rooms) {
+        if (room.id === e.target.value) {
+          this.props.handleRoomSelectionChange(room);
+        }
+      }
     };
 
     this.handleNameChange = e => {
-      let selectedRoom = Object.assign({}, this.state.selectedRoom);
-      let rooms = this.state.rooms.map(room => {
-        if (room.id === selectedRoom.id) {
-          room.name = e.target.value;
-          selectedRoom.name = e.target.value;
-        }
-
-        return room;
-      });
-
-      this.setState({
-        rooms,
-        selectedRoom
-      });
+      this.props.handleFormChange(e.target.value, "NAME");
     };
 
     this.handleDescriptionChange = e => {
-      let selectedRoom = Object.assign({}, this.state.selectedRoom);
-      let rooms = this.state.rooms.map(room => {
-        if (room.id === selectedRoom.id) {
-          room.description = e.target.value;
-          selectedRoom.description = e.target.value;
-        }
-
-        return room;
-      });
-
-      this.setState({
-        rooms,
-        selectedRoom
-      });
+      this.props.handleFormChange(e.target.value, "DESC");
     };
   }
 
@@ -97,15 +75,12 @@ class EditRoomForm extends Component {
     const { classes } = this.props;
 
     if (this.state.rooms.length > 0) {
-      for (let room of this.props.rooms) {
-        if (room.id === this.props.selectedRoom) {
-          selectedRoom = room;
-        }
+      if (this.props.room.id === undefined) {
+        selectedRoom = this.props.rooms[0];
+      } else {
+        selectedRoom = this.props.room;
       }
 
-      if (selectedRoom === undefined) {
-        selectedRoom = this.props.rooms[0];
-      }
       let roomSelections = this.state.rooms.map((room, key) => (
         <MenuItem key={key} value={room.id}>
           {room.name}
@@ -190,7 +165,8 @@ EditRoomForm.propTypes = {
   handleDialogClose: PropTypes.func.isRequired,
   handleEditRoomSubmit: PropTypes.func.isRequired,
   handleRoomSelectionChange: PropTypes.func.isRequired,
-  selectedRoom: PropTypes.number
+  handleFormChange: PropTypes.func.isRequired,
+  room: PropTypes.object
 };
 
 export default withStyles(styles)(EditRoomForm);

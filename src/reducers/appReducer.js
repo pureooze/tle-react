@@ -43,7 +43,7 @@ const AppReducer = (state = [], action) => {
     case "ROOM_SELECTION_CHANGE":
       return {
         ...state,
-        selectedRoom: action.payload.selectedRoom
+        editRoomForm: action.payload.selectedRoom
       };
     case "UPDATE_ADD_ROOM_FORM_NAME":
       return {
@@ -58,6 +58,24 @@ const AppReducer = (state = [], action) => {
         ...state,
         addRoomForm: {
           name: state.addRoomForm.name,
+          description: action.payload.description
+        }
+      };
+    case "UPDATE_EDIT_ROOM_FORM_NAME":
+      return {
+        ...state,
+        editRoomForm: {
+          id: state.editRoomForm.id,
+          name: action.payload.name,
+          description: state.editRoomForm.description
+        }
+      };
+    case "UPDATE_EDIT_ROOM_FORM_DESC":
+      return {
+        ...state,
+        editRoomForm: {
+          id: state.editRoomForm.id,
+          name: state.editRoomForm.name,
           description: action.payload.description
         }
       };

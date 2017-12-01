@@ -20,6 +20,11 @@ let store = createStore(tleApp, {
     addRoomForm: {
       name: "",
       description: ""
+    },
+    editRoomForm: {
+      id: undefined,
+      name: "",
+      description: ""
     }
   }
 });

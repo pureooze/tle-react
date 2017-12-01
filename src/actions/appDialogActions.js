@@ -34,11 +34,11 @@ export const loadEditRoomDialog = () => {
   };
 };
 
-export const roomSelectionChange = roomId => {
+export const roomSelectionChange = selectedRoom => {
   return {
     type: "ROOM_SELECTION_CHANGE",
     payload: {
-      selectedRoom: roomId
+      selectedRoom: selectedRoom
     }
   };
 };
@@ -84,6 +84,32 @@ export const updateAddRoomForm = (value, field) => {
     default:
       return {
         type: "UPDATE_ADD_ROOM_FORM_NAME",
+        payload: {
+          name: value
+        }
+      };
+  }
+};
+
+export const updateEditRoomForm = (value, field) => {
+  switch (field) {
+    case "NAME":
+      return {
+        type: "UPDATE_EDIT_ROOM_FORM_NAME",
+        payload: {
+          name: value
+        }
+      };
+    case "DESC":
+      return {
+        type: "UPDATE_EDIT_ROOM_FORM_DESC",
+        payload: {
+          description: value
+        }
+      };
+    default:
+      return {
+        type: "UPDATE_EDIT_ROOM_FORM_NAME",
         payload: {
           name: value
         }

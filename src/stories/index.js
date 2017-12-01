@@ -50,7 +50,7 @@ rooms[0].exits.push({
 const appStories = storiesOf("App", module);
 appStories.addDecorator(withKnobs);
 
-let store = createStore(tleApp, {
+let appStore = createStore(tleApp, {
   AppReducer: {
     drawerOpen: false,
     anchor: "left",
@@ -61,6 +61,10 @@ let store = createStore(tleApp, {
     addRoomForm: {
       name: "",
       description: ""
+    },
+    editRoomForm: {
+      name: "",
+      description: ""
     }
   }
 });
@@ -68,14 +72,14 @@ let store = createStore(tleApp, {
 appStories.add(
   "Default",
   withInfo("Default app values")(() => (
-    <Provider store={store}>
+    <Provider store={appStore}>
       <App rooms={rooms} />
     </Provider>
   ))
 );
 
 // Edit Room Form
-store = createStore(tleApp, {
+let editRoomFormStore = createStore(tleApp, {
   AppReducer: {
     drawerOpen: true,
     anchor: "left",
@@ -97,6 +101,11 @@ store = createStore(tleApp, {
     addRoomForm: {
       name: "",
       description: ""
+    },
+    editRoomForm: {
+      id: undefined,
+      name: "",
+      description: ""
     }
   }
 });
@@ -107,7 +116,7 @@ editRoomFormStories.addDecorator(withKnobs);
 editRoomFormStories.add(
   "Room Exists",
   withInfo("Room exists")(() => (
-    <Provider store={store}>
+    <Provider store={editRoomFormStore}>
       <App rooms={rooms} />
     </Provider>
   ))

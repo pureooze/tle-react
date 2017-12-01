@@ -25,8 +25,10 @@ import {
   loadEditRoomDialog,
   editRooms,
   updateAddRoomForm,
-  roomSelectionChange
+  roomSelectionChange,
+  updateEditRoomForm
 } from "../actions/appDialogActions";
+import roomModificationListItems from "../Components/roomModificationListItems";
 
 class App extends Component {
   constructor(props) {
@@ -59,8 +61,12 @@ class App extends Component {
       this.props.dispatch(closeAppDialog());
     };
 
-    this.handleAddRoomFormChange = (char, field) => {
-      this.props.dispatch(updateAddRoomForm(char, field));
+    this.handleAddRoomFormChange = (value, field) => {
+      this.props.dispatch(updateAddRoomForm(value, field));
+    };
+
+    this.handleEditRoomFormChange = (value, field) => {
+      this.props.dispatch(updateEditRoomForm(value, field));
     };
 
     this.handleAddRoomSubmit = newRoom => {
@@ -70,8 +76,8 @@ class App extends Component {
       this.props.dispatch(closeAppDialog());
     };
 
-    this.handleRoomSelectionChange = roomId => {
-      this.props.dispatch(roomSelectionChange(roomId));
+    this.handleRoomSelectionChange = room => {
+      this.props.dispatch(roomSelectionChange(room));
     };
 
     this.getDialogContent = () => {
@@ -86,13 +92,21 @@ class App extends Component {
             />
           );
         case "EDIT_ROOM":
+          if (
+            this.props.editRoomForm.id === undefined &&
+            this.props.rooms.length > 0
+          ) {
+            this.props.dispatch(roomSelectionChange(this.props.rooms[0]));
+          }
+
           return (
             <EditRoomForm
               rooms={this.props.rooms}
-              selectedRoom={this.props.selectedRoom}
+              room={this.props.editRoomForm}
               handleDialogClose={this.handleAppDialogClose}
               handleEditRoomSubmit={this.handleEditRoomSubmit}
               handleRoomSelectionChange={this.handleRoomSelectionChange}
+              handleFormChange={this.handleEditRoomFormChange}
             />
           );
         default:
@@ -157,7 +171,7 @@ const mapStateToProps = store => {
     appDialogType: store.AppReducer.appDialogType,
     rooms: store.AppReducer.rooms,
     addRoomForm: store.AppReducer.addRoomForm,
-    selectedRoom: store.AppReducer.selectedRoom,
+    editRoomForm: store.AppReducer.editRoomForm,
     anchor: store.AppReducer.anchor
   };
 };
@@ -168,8 +182,8 @@ App.propTypes = {
   appDialogType: PropTypes.string.isRequired,
   rooms: PropTypes.array.isRequired,
   addRoomForm: PropTypes.object.isRequired,
+  editRoomForm: PropTypes.object.isRequired,
   anchor: PropTypes.string.isRequired,
-  selectedRoom: PropTypes.number,
   dispatch: PropTypes.func.isRequired
 };
 

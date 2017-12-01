@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import IconButton from "material-ui/IconButton";
-import MenuIcon from "material-ui-icons/Menu";
-import Drawer from "material-ui/Drawer";
-import Divider from "material-ui/Divider";
-import ChevronLeftIcon from "material-ui-icons/ChevronLeft";
-import List from "material-ui/List";
-import RoomModificationListItems from "../Components/roomModificationListItems";
-import AppDialog from "../Components/appDialog";
-import AddRoomForm from "../Components/addRoomForm";
-import EditRoomForm from "../Components/editRoomForm";
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
+import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
+import List from 'material-ui/List';
+import RoomModificationListItems from '../Components/roomModificationListItems';
+import AppDialog from '../Components/appDialog';
+import AddRoomForm from '../Components/addRoomForm';
+import EditRoomForm from '../Components/editRoomForm';
 
-import { openDrawer, closeDrawer } from "../actions/drawerActions";
+import { openDrawer, closeDrawer } from '../actions/drawerActions';
 import {
   openAppDialog,
   loadAddRoomDialog,
@@ -27,8 +27,8 @@ import {
   updateAddRoomForm,
   roomSelectionChange,
   updateEditRoomForm
-} from "../actions/appDialogActions";
-import roomModificationListItems from "../Components/roomModificationListItems";
+} from '../actions/appDialogActions';
+import roomModificationListItems from '../Components/roomModificationListItems';
 
 class App extends Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class App extends Component {
 
     this.getDialogContent = () => {
       switch (this.props.appDialogType) {
-        case "ADD_ROOM":
+        case 'ADD_ROOM':
           return (
             <AddRoomForm
               room={this.props.addRoomForm}
@@ -91,7 +91,7 @@ class App extends Component {
               handleAddRoomSubmit={this.handleAddRoomSubmit}
             />
           );
-        case "EDIT_ROOM":
+        case 'EDIT_ROOM':
           if (
             this.props.editRoomForm.id === undefined &&
             this.props.rooms.length > 0

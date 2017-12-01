@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { withStyles } from "material-ui/styles";
-import Select from "material-ui/Select";
-import { MenuItem } from "material-ui/Menu";
+import { withStyles } from 'material-ui/styles';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 import {
   DialogContentText,
   DialogActions,
   DialogContent,
   DialogTitle
-} from "material-ui/Dialog";
-import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
-import DeleteIcon from "material-ui-icons/Delete";
-import TextField from "material-ui/TextField";
-import { select } from "@storybook/addon-knobs";
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
+import TextField from 'material-ui/TextField';
+import { select } from '@storybook/addon-knobs';
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
   root: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -61,16 +61,16 @@ class EditRoomForm extends Component {
     };
 
     this.handleNameChange = e => {
-      this.props.handleFormChange(e.target.value, "NAME");
+      this.props.handleFormChange(e.target.value, 'NAME');
     };
 
     this.handleDescriptionChange = e => {
-      this.props.handleFormChange(e.target.value, "DESC");
+      this.props.handleFormChange(e.target.value, 'DESC');
     };
   }
 
   render() {
-    let dialogTitle = "Edit Rooms";
+    let dialogTitle = 'Edit Rooms';
     let roomSelector, selectedRoom;
     const { classes } = this.props;
 

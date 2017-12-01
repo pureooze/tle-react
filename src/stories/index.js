@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { storiesOf } from "@storybook/react";
-import { specs, describe, it } from "storybook-addon-specifications";
-import { withInfo } from "@storybook/addon-info";
-import { withKnobs, object, text } from "@storybook/addon-knobs";
+import { storiesOf } from '@storybook/react';
+import { specs, describe, it } from 'storybook-addon-specifications';
+import { withInfo } from '@storybook/addon-info';
+import { withKnobs, object, text } from '@storybook/addon-knobs';
 
-import { mount, shallow } from "enzyme";
-import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import expect from "expect";
+import { mount, shallow } from 'enzyme';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import expect from 'expect';
 
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import tleApp from "../reducers";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import tleApp from '../reducers';
 
-import App from "../Wrapper/App";
+import App from '../Wrapper/App';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -23,55 +23,55 @@ Enzyme.configure({
 let rooms = [
   {
     id: 0,
-    name: "The First Room",
-    entryText: "You entered the first room",
+    name: 'The First Room',
+    entryText: 'You entered the first room',
     exits: []
   },
   {
     id: 1,
-    name: "The Second Room",
-    entryText: "You entered the second room",
+    name: 'The Second Room',
+    entryText: 'You entered the second room',
     exits: []
   },
   {
     id: 2,
-    name: "The Third Room",
-    entryText: "You entered the third room",
+    name: 'The Third Room',
+    entryText: 'You entered the third room',
     exits: []
   }
 ];
 
 rooms[0].exits.push({
-  name: "SecondRoom",
+  name: 'SecondRoom',
   targetID: 1
 });
 
 // Full App
-const appStories = storiesOf("App", module);
+const appStories = storiesOf('App', module);
 appStories.addDecorator(withKnobs);
 
 let appStore = createStore(tleApp, {
   AppReducer: {
     drawerOpen: false,
-    anchor: "left",
+    anchor: 'left',
     appDialogOpen: false,
-    appDialogType: "",
-    selectedRoom: "",
+    appDialogType: '',
+    selectedRoom: '',
     rooms: [],
     addRoomForm: {
-      name: "",
-      description: ""
+      name: '',
+      description: ''
     },
     editRoomForm: {
-      name: "",
-      description: ""
+      name: '',
+      description: ''
     }
   }
 });
 
 appStories.add(
-  "Default",
-  withInfo("Default app values")(() => (
+  'Default',
+  withInfo('Default app values')(() => (
     <Provider store={appStore}>
       <App rooms={rooms} />
     </Provider>
@@ -82,40 +82,40 @@ appStories.add(
 let editRoomFormStore = createStore(tleApp, {
   AppReducer: {
     drawerOpen: true,
-    anchor: "left",
+    anchor: 'left',
     appDialogOpen: true,
-    appDialogType: "EDIT_ROOM",
+    appDialogType: 'EDIT_ROOM',
     selectedRoom: undefined,
     rooms: [
       {
         id: 4892348943,
-        name: "New Room",
-        description: "This is a room"
+        name: 'New Room',
+        description: 'This is a room'
       },
       {
         id: 4892348090,
-        name: "Second Room",
-        description: "The second room in the game"
+        name: 'Second Room',
+        description: 'The second room in the game'
       }
     ],
     addRoomForm: {
-      name: "",
-      description: ""
+      name: '',
+      description: ''
     },
     editRoomForm: {
       id: undefined,
-      name: "",
-      description: ""
+      name: '',
+      description: ''
     }
   }
 });
 
-const editRoomFormStories = storiesOf("Edit Room Form", module);
+const editRoomFormStories = storiesOf('Edit Room Form', module);
 editRoomFormStories.addDecorator(withKnobs);
 
 editRoomFormStories.add(
-  "Room Exists",
-  withInfo("Room exists")(() => (
+  'Room Exists',
+  withInfo('Room exists')(() => (
     <Provider store={editRoomFormStore}>
       <App rooms={rooms} />
     </Provider>

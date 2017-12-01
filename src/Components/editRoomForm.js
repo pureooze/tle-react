@@ -1,145 +1,186 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { withStyles } from 'material-ui/styles'
-import Select from 'material-ui/Select'
-import { MenuItem } from 'material-ui/Menu'
-import { DialogContentText, DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog'
-import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
-import DeleteIcon from 'material-ui-icons/Delete'
-import TextField from 'material-ui/TextField'
+import { withStyles } from "material-ui/styles";
+import Select from "material-ui/Select";
+import { MenuItem } from "material-ui/Menu";
+import {
+  DialogContentText,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from "material-ui/Dialog";
+import Button from "material-ui/Button";
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "material-ui-icons/Delete";
+import TextField from "material-ui/TextField";
+import { select } from "@storybook/addon-knobs";
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   },
   root: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
   }
-})
+});
 
 class EditRoomForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       rooms: this.props.rooms.slice(),
       selectedRoom: Object.assign({}, this.props.rooms[0])
-    }
+    };
 
-    this.handleDeleteRoom = (e) => {
-      let roomList = this.state.rooms.map((room) => {
+    this.handleDeleteRoom = e => {
+      let roomList = this.state.rooms.map(room => {
         if (room.id !== this.state.selectedRoom.id) {
-          return room
+          return room;
         }
-      })
+      });
       this.setState({
         rooms: roomList,
         selectedRoom: Object.assign({}, roomList[0])
-      })
-    }
+      });
+    };
 
-    this.handleRoomSelectionChange = (e) => {
-      for (let room of this.state.rooms) {
-        if (room.id === e.target.value) {
-          this.setState({
-            selectedRoom: Object.assign({}, room)
-          })
-        }
-      }
-    }
+    this.handleRoomSelectionChange = e => {
+      this.props.handleRoomSelectionChange(e.target.value);
+    };
 
-    this.handleNameChange = (e) => {
-      let selectedRoom = Object.assign({}, this.state.selectedRoom)
-      let rooms = this.state.rooms.map((room) => {
-        if(room.id === selectedRoom.id){
-          room.name = e.target.value
-          selectedRoom.name = e.target.value
+    this.handleNameChange = e => {
+      let selectedRoom = Object.assign({}, this.state.selectedRoom);
+      let rooms = this.state.rooms.map(room => {
+        if (room.id === selectedRoom.id) {
+          room.name = e.target.value;
+          selectedRoom.name = e.target.value;
         }
 
-        return room
-      })
+        return room;
+      });
 
       this.setState({
         rooms,
         selectedRoom
-      })
-    }
+      });
+    };
 
-    this.handleDescriptionChange = (e) => {
-      let selectedRoom = Object.assign({}, this.state.selectedRoom)
-      let rooms = this.state.rooms.map((room) => {
-        if(room.id === selectedRoom.id){
-          room.description = e.target.value
-          selectedRoom.description = e.target.value
+    this.handleDescriptionChange = e => {
+      let selectedRoom = Object.assign({}, this.state.selectedRoom);
+      let rooms = this.state.rooms.map(room => {
+        if (room.id === selectedRoom.id) {
+          room.description = e.target.value;
+          selectedRoom.description = e.target.value;
         }
 
-        return room
-      })
+        return room;
+      });
 
       this.setState({
         rooms,
         selectedRoom
-      })
-    }
+      });
+    };
   }
 
   render() {
-    let dialogTitle = 'Edit Rooms'
-    let roomSelector
-    const {classes} = this.props
+    let dialogTitle = "Edit Rooms";
+    let roomSelector, selectedRoom;
+    const { classes } = this.props;
 
-    console.log(this.state.selectedRoom)
-    if (this.state.rooms.length > 0 && this.state.selectedRoom !== undefined) {
+    if (this.state.rooms.length > 0) {
+      for (let room of this.props.rooms) {
+        if (room.id === this.props.selectedRoom) {
+          selectedRoom = room;
+        }
+      }
+
+      if (selectedRoom === undefined) {
+        selectedRoom = this.props.rooms[0];
+      }
       let roomSelections = this.state.rooms.map((room, key) => (
-        <MenuItem key={ key } value={ room.id }>
-        { room.name }
+        <MenuItem key={key} value={room.id}>
+          {room.name}
         </MenuItem>
-      ))
+      ));
 
-      roomSelector = (<div>
-                        <div>
-                          <Select value={ this.state.selectedRoom.id } onChange={ this.handleRoomSelectionChange }>
-                            { roomSelections }
-                          </Select>
-                          <IconButton onClick={ this.handleDeleteRoom } color='primary' className={ classes.button } aria-label='Delete Room'>
-                            <DeleteIcon />
-                          </IconButton>
-                        </div>
-                        <div>
-                          <TextField onChange={this.handleNameChange} id='name' label='Name' value={ this.state.selectedRoom.name } className={ classes.textField } margin='normal' />
-                          <TextField onChange={this.handleDescriptionChange} id='description' label='Description' value={ this.state.selectedRoom.description } className={ classes.textField } margin='normal' />
-                        </div>
-                      </div>)
+      roomSelector = (
+        <div>
+          <div>
+            <Select
+              value={selectedRoom.id}
+              onChange={this.handleRoomSelectionChange}
+            >
+              {roomSelections}
+            </Select>
+            <IconButton
+              onClick={this.handleDeleteRoom}
+              color="primary"
+              className={classes.button}
+              aria-label="Delete Room"
+            >
+              <DeleteIcon />
+            </IconButton>
+          </div>
+          <div>
+            <TextField
+              onChange={this.handleNameChange}
+              id="name"
+              label="Name"
+              value={selectedRoom.name}
+              className={classes.textField}
+              margin="normal"
+            />
+            <TextField
+              onChange={this.handleDescriptionChange}
+              id="description"
+              label="Description"
+              value={selectedRoom.description}
+              className={classes.textField}
+              margin="normal"
+            />
+          </div>
+        </div>
+      );
     } else {
-      roomSelector = <DialogContentText>There are currently no rooms to edit.</DialogContentText>
+      roomSelector = (
+        <DialogContentText>
+          There are currently no rooms to edit.
+        </DialogContentText>
+      );
     }
 
     return (
       <div>
-        <DialogTitle>
-          { dialogTitle }
-        </DialogTitle>
+        <DialogTitle>{dialogTitle}</DialogTitle>
         <DialogContent>
-          { roomSelector }
+          {roomSelector}
           <DialogActions>
-            <Button color='primary' className={ classes.button } onClick={ (e) => this.props.handleEditRoomSubmit(this.state.rooms) }>
+            <Button
+              color="primary"
+              className={classes.button}
+              onClick={e => this.props.handleEditRoomSubmit(this.state.rooms)}
+            >
               Ok
             </Button>
-            <Button className={ classes.button } onClick={ this.props.handleDialogClose }>
+            <Button
+              className={classes.button}
+              onClick={this.props.handleDialogClose}
+            >
               Cancel
             </Button>
           </DialogActions>
         </DialogContent>
       </div>
-    )
+    );
   }
 }
 
@@ -147,7 +188,9 @@ EditRoomForm.propTypes = {
   classes: PropTypes.object.isRequired,
   rooms: PropTypes.array.isRequired,
   handleDialogClose: PropTypes.func.isRequired,
-  handleEditRoomSubmit: PropTypes.func.isRequired
-}
+  handleEditRoomSubmit: PropTypes.func.isRequired,
+  handleRoomSelectionChange: PropTypes.func.isRequired,
+  selectedRoom: PropTypes.number
+};
 
-export default withStyles(styles)(EditRoomForm)
+export default withStyles(styles)(EditRoomForm);

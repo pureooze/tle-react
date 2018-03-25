@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from 'material-ui/styles'
 import TextField from 'material-ui/TextField'
-import { DialogContentText, DialogContent, DialogActions } from 'material-ui/Dialog'
+import { DialogContentText, DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
@@ -30,42 +30,39 @@ class AddRoomForm extends Component {
     }
 
     this.handleNameChange = (e) => {
-      let room = this.state.room
-      room.name = e.target.value
-
-      this.setState({
-        room
-      })
+      this.props.handleFormChange(e.target.value, 'NAME')
     }
 
     this.handleDescriptionChange = (e) => {
-      let room = this.state.room
-      room.description = e.target.value
-
-      this.setState({
-        room
-      })
+      this.props.handleFormChange(e.target.value, 'DESC')
     }
   }
 
   render () {
+    let dialogTitle = 'Add Room'
     let contentText = 'New rooms require a name and desciption.'
     const {classes} = this.props
+
     return (
       <div>
-        <DialogContentText>
-          { contentText }
-        </DialogContentText>
-        <TextField id='name' label='Name' value={this.state.name} onChange={this.handleNameChange} fullWidth margin='normal' />
-        <TextField id='description' label='Description' value={this.state.description} onChange={this.handleDescriptionChange} fullWidth margin='normal' />
-        <DialogActions>
-          <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit(this.state.room)}>
-            Ok
-          </Button>
-          <Button className={classes.button} onClick={this.props.handleDialogClose}>
-            Cancel
-          </Button>
-        </DialogActions>
+        <DialogTitle>
+          { dialogTitle }
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            { contentText }
+          </DialogContentText>
+          <TextField id='name' label='Name' value={this.props.room.name} onChange={this.handleNameChange} fullWidth margin='normal' />
+          <TextField id='description' label='Description' value={this.props.room.description} onChange={this.handleDescriptionChange} fullWidth margin='normal' />
+          <DialogActions>
+            <Button color='primary' className={classes.button} onClick={(e) => this.props.handleAddRoomSubmit()}>
+              Ok
+            </Button>
+            <Button className={classes.button} onClick={this.props.handleDialogClose}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </DialogContent>
       </div>
     )
   }
@@ -73,8 +70,10 @@ class AddRoomForm extends Component {
 
 AddRoomForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  room: PropTypes.object.isRequired,
   handleDialogClose: PropTypes.func.isRequired,
-  handleAddRoomSubmit: PropTypes.func.isRequired
+  handleAddRoomSubmit: PropTypes.func.isRequired,
+  handleFormChange: PropTypes.func.isRequired
 }
 
 export default withStyles(styles)(AddRoomForm)

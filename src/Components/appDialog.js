@@ -4,16 +4,11 @@ import PropTypes from 'prop-types'
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog'
 
 class AppDialog extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <Dialog open={this.props.appDialogOpen} onRequestClose={this.props.handleAppDialogClose}>
-          <DialogTitle>
-            { this.props.title }
-          </DialogTitle>
-          <DialogContent>
-            { this.props.children }
-          </DialogContent>
+        <Dialog open={ this.props.appDialogOpen } onRequestClose={ this.props.handleAppDialogClose }>
+          { this.props.children }
         </Dialog>
       </div>
     )
